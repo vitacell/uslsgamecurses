@@ -19,6 +19,7 @@ int main()
     refresh();
 
 	char mas[10][21];
+	char apples_buffer[25];
 
 	// coordenates
 	int x = 10;
@@ -63,8 +64,20 @@ int main()
 		//system("cls||clear");
 		clear(); // curses clear
 
+
+		/***********************************************************************
+		"-2" indica que el número debe alinearse a la
+		izquierda dentro de dos caracteres
+		indicates that the number must to align to the
+		left inside the two characters.
+
+		"*c" indica que el espacio adicional debe rellenarse con caracteres ' '
+		indicates that the additional space must to refill with ' ' characters.
+		***********************************************************************/
 		attron(COLOR_PAIR(2));
-		mvprintw(LINES - 3, 0, "          APPLES EATEN: %d          ", eaten_apples);
+		sprintf(apples_buffer, "    APPLES EATEN: %-9d%*c", eaten_apples, 8, ' ');
+		//mvprintw(LINES - 3, 0, "          APPLES EATEN: %d          ", eaten_apples);
+		mvprintw(LINES - 3, 0, apples_buffer);
 		attroff(COLOR_PAIR(2));
 
 		attron(COLOR_PAIR(1));
@@ -100,6 +113,7 @@ int main()
 		// if an apple is eaten
 		if ((x == ax) && (y == ay))
 		{
+			//eaten_apples = eaten_apples + 999 * 9; // fore testing
 			eaten_apples++;
 
 			// rand() generates from 0 to RAND_MAX
